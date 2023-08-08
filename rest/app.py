@@ -7,12 +7,11 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from checkPass import encrypt, check_password
 from datetime import timedelta
 from flask_cors import CORS
-
 import os
 
 app = Flask(__name__)
+cors = CORS(app)
 
-CORS(app)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.permanent_session_lifetime = timedelta(days=15)
