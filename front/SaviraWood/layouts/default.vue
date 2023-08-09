@@ -15,7 +15,7 @@
                 <li><NuxtLink to="/" class="">Home</NuxtLink></li>
                 <li><NuxtLink to="/About" class="">About</NuxtLink></li>
                 <li><nuxt-link to="/Furniture" class="">Furniture</nuxt-link></li>
-                <li><nuxt-link to="/product" class="">Pictures</nuxt-link></li>
+                <li><nuxt-link to="/pictures" class="">Pictures</nuxt-link></li>
             </ul>
             <ul class="flex content-center gap-4 mx-4 list-none">
                 <li>

@@ -48,6 +48,7 @@ class Woodenpictures(db.Model):
     width = db.Column(db.Integer)
     height = db.Column(db.Integer)
     weight = db.Column(db.Integer)
+  
     price = db.Column(db.Float)
     def __init__(self, name, width, height, weight, price ):
         self.name = name
