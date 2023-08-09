@@ -165,6 +165,24 @@ def get_user(id):
     users = Users.query.get(id)
     return user_schema.jsonify(users)
 
+@app.route('/change_password/<id>', methods = ['PUT'])
+def update_password(id):
+    user = Users.query.get(id)
+    
+    name = request.json['name']
+    surname = request.json['surname']
+    email = request.json['email']
+    password = encrypt(request.json['password'])
+    
+    Users.name = name
+    Users.surname = surname
+    Users.email = email
+    Users.password = encrypt(password)
+    
+    db.session.commit()
+    
+    return user_schema.jsonify(user)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
