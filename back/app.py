@@ -38,8 +38,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
-#Product Class
 
+# PRODUCTS 
+
+#Product Class
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
@@ -57,8 +59,11 @@ class ProductSchema(ma.Schema):
 product_schema = ProductSchema()
 products_schema = ProductSchema(many=True)
 
+
 # with app.app_context():
 #     db.create_all()
+
+# PRODUCT CRUD
 
 @app.route('/product', methods=['POST'])
 def add_product():
@@ -107,6 +112,33 @@ def delete_product(id):
     db.session.commit()
     
     return product_schema.jsonify(product)
+
+# ACCOUNT AUTH
+
+#User Class
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    surname = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.String(255), nullable=False)
+    def __init__(self, name, surname, email, password):
+        self.name = name
+        self.surname = surname
+        self.email = email
+        self.password = password
+
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'name', 'surname', 'email')
+        exclude = ('password')
+
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
+
+# USER CRUD
+
+
 
 
 if __name__ == '__main__':
