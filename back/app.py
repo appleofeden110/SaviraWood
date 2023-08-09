@@ -42,22 +42,26 @@ ma = Marshmallow(app)
 # PRODUCTS 
 
 #Product Class
-class Product(db.Model):
+class Woodenpictures(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
+    width = db.Column(db.Integer)
+    height = db.Column(db.Integer)
+    weight = db.Column(db.Integer)
     price = db.Column(db.Float)
-    qty = db.Column(db.Integer)
-    def __init__(self, name, price, qty):
+    def __init__(self, name, width, height, weight, price ):
         self.name = name
+        self.width = width
+        self.height = height
+        self.weight = weight
         self.price = price
-        self.qty = qty
 
-class ProductSchema(ma.Schema):
+class WoodenpicturesSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'price', 'qty')
+        fields = ('id', 'name', 'width', 'height', 'wight', 'price')
 
-product_schema = ProductSchema()
-products_schema = ProductSchema(many=True)
+product_schema = WoodenpicturesSchema()
+products_schema = WoodenpicturesSchema(many=True)
 
 
 # with app.app_context():
@@ -65,49 +69,55 @@ products_schema = ProductSchema(many=True)
 
 # PRODUCT CRUD
 
-@app.route('/product', methods=['POST'])
+@app.route('/pictures', methods=['POST'])
 def add_product():
     name = request.json['name']
+    width = request.json['width']
+    height = request.json['height']
+    weight = request.json['weight']
     price = request.json['price']
-    qty = request.json['qty']
     
-    new_product = Product(name, price, qty)
+    new_product = Woodenpictures(name, width, height, weight, price)
     
     db.session.add(new_product)
     db.session.commit()
     
     return product_schema.jsonify(new_product)
 
-@app.route('/product', methods=['GET'])
+@app.route('/pictures', methods=['GET'])
 def get_products():
-    all_products = Product.query.all()
+    all_products = Woodenpictures.query.all()
     result = products_schema.dump(all_products)
     return jsonify(result)
 
-@app.route('/product/<id>', methods=['GET'])
+@app.route('/pictures/<id>', methods=['GET'])
 def get_product(id):
-    product = Product.query.get(id)
+    product = Woodenpictures.query.get(id)
     return product_schema.jsonify(product)
 
-@app.route('/product/<id>', methods=['PUT'])
+@app.route('/pictures/<id>', methods=['PUT'])
 def update_product(id):
-    product = Product.query.get(id)
+    product = Woodenpictures.query.get(id)
     
     name = request.json['name']
+    width = request.json['width']
+    height = request.json['height']
+    weight = request.json['weight']
     price = request.json['price']
-    qty = request.json['qty']
     
-    product.name = name
-    product.price = price
-    product.qty = qty
+    Woodenpictures.name = name
+    Woodenpictures.width = width
+    Woodenpictures.height = height
+    Woodenpictures.weight = weight
+    Woodenpictures.price = price
     
     db.session.commit()
     
     return product_schema.jsonify(product)
 
-@app.route('/product/<id>', methods=['DELETE'])
+@app.route('/pictures/<id>', methods=['DELETE'])
 def delete_product(id):
-    product = Product.query.get(id)
+    product = Woodenpictures.query.get(id)
     db.session.delete(product)
     db.session.commit()
     
