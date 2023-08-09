@@ -2,7 +2,7 @@
     <div>
         <div class="grid grid-cols-4 gap-5">
             <div v-for="p in products">
-                <nuxt-link :to="`/product/${p.id}`">{{ p.name }}</nuxt-link>
+                <a :href="`/product/${p.id}`">{{ p.name }}</a>
             </div>
         </div>
     </div>
