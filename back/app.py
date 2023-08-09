@@ -116,7 +116,7 @@ def delete_product(id):
 # ACCOUNT AUTH
 
 #User Class
-class User(db.Model):
+class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     surname = db.Column(db.String(255), nullable=False)
@@ -128,18 +128,32 @@ class User(db.Model):
         self.email = email
         self.password = password
 
-class UserSchema(ma.Schema):
+class UsersSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'name', 'surname', 'email')
-        exclude = ('password')
+        fields = ('id', 'name', 'surname', 'email', 'password')
 
-user_schema = UserSchema()
-users_schema = UserSchema(many=True)
+user_schema = UsersSchema()
+users_schema = UsersSchema(many=True)
 
 # USER CRUD
 
+@app.route('/register', methods = ['POST'])
+def register():
+    name = request.json['name']
+    surname = request.json['surname']
+    email = request.json['email']
+    password = request.json['password']
+    
+    create_user = Users(name, surname, email, password)
+    
+    db.session.add(create_user)
+    db.session.commit()
+    
+    return product_schema.jsonify(create_user)
 
-
+@app.route('/login', methods = ['GET'])
+def fname(arg):
+    pass
 
 if __name__ == '__main__':
     app.run(debug=True)
