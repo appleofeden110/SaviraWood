@@ -142,18 +142,19 @@ def register():
     name = request.json['name']
     surname = request.json['surname']
     email = request.json['email']
-    password = request.json['password']
-    
+    password = encrypt(request.json['password'])
     create_user = Users(name, surname, email, password)
     
     db.session.add(create_user)
     db.session.commit()
     
-    return product_schema.jsonify(create_user)
+    return user_schema.jsonify(create_user)
 
-@app.route('/login', methods = ['GET'])
-def fname(arg):
-    pass
+@app.route('/login/<id>', methods = ['GET'])
+def get_user(id):
+    users = Users.query.get(id)
+    return user_schema.jsonify(users)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
