@@ -1,16 +1,17 @@
 <template>
-    <div >
+    <div>
         <h1>Name: {{ pictures.name }}</h1>
         <p>price: {{ pictures.price }}</p>
-        <p>photo</p>
+        <p>photo: <nuxt-img :src="`/pics/Big_Ship/${prodName}`" alt="prod_pic" class="w-36" /></p>
     </div>
 </template>
 
 <script setup>
     const { id } = useRoute().params
-    const { data: pictures } = useFetch(`http://127.0.0.1:5000/pictures/${id}`)
+    const { data: pictures } = await useFetch(`http://127.0.0.1:5000/pictures/${id}`)
+    const prodName = "Big_Ship_View.jpg"
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

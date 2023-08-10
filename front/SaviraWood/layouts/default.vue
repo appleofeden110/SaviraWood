@@ -8,7 +8,7 @@
              
             <ul class="flex content-center list-none">
                 <li>
-                    <nuxt-link to="/"><img src="../assets/pics/company_assets/SAVIRA.svg" alt="" class="w-36"></nuxt-link>                
+                    <nuxt-link to="/"><nuxt-img src="/pics/company_assets/SAVIRA.svg" alt="" class="w-36" /></nuxt-link>                
                 </li>
             </ul>
             <ul class="flex content-center justify-start gap-4 list-none">
