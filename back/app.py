@@ -7,7 +7,7 @@ from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from checkPass import encrypt, check_password
 from datetime import timedelta
 from flask_cors import CORS
-import os
+import os, json
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -183,6 +183,27 @@ def update_password(id):
     db.session.commit()
     
     return user_schema.jsonify(user)
+
+@app.route('/delete_user/<id>', methods = ['DELETE'])
+def delete_user(id):
+    user = Users.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
+    
+    return user_schema.jsonify(user)
+
+@app.route('/email', methods=['POST'])
+def send_email():
+    name = request.json['name']
+    email = request.json['email']
+    message = request.json['message']
+    
+    msg = Message(f'New Message from {name}', sender = 'savirawood22@gmail.com', recipients = [email], body=message)
+    mail.send(msg)
+
+    return user_schema.jsonify(msg)
+
+
 
 
 if __name__ == '__main__':

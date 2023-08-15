@@ -18,6 +18,7 @@
   
   <router-view></router-view>
   </nuxt-layout>
+
 </template>
 
 <script setup>
