@@ -13,6 +13,8 @@ flask-mail = "*"
 flask-mysqldb = "*"
 flask-wtf = "*"
 flask-cors = "*"
+django = "*"
+mysqlclient = "*"
 
 [dev-packages]
 
