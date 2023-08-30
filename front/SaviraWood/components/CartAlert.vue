@@ -11,11 +11,11 @@
 </template>
 
 <script setup>    
-const chlen = ref(props.chlen);
+const show = ref(props.show);
 
 const hidButton = () => { 
     console.log('clicked');
-    chlen.value = false;    
+    show.value = false;    
 };  
 
 
@@ -29,7 +29,7 @@ const props = defineProps({
         type: Number,
         required: true
     },
-    chlen: {
+    show: {
         type: Boolean,
         required: true
     }

@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <CartAlert chlen=true id=2 />
+    <CartAlert show=true id=2 />
     <p>
       <button >Hid alert</button>
     </p>
