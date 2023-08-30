@@ -1,13 +1,18 @@
-<template>
-    <div>
-        <h1> FUrniture </h1>
-    </div>
-</template>
-
 <script setup>
+const products = ref('');
+getProd(2)
+.then((data) => {
+    products.value = data.value;
+    console.log(products.value);
+});
 
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<template>
+  <div>
+    <CartAlert id=2 />
+    <p>
+      {{ products.name }}
+    </p>
+  </div>
+</template>
