@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-show = "chlen === true">
         <div class="relative px-4 py-3 text-green-700 bg-green-100 border border-green-400 rounded" role="alert">
             <strong class="font-bold">Congrats! </strong>
             <span class="block sm:inline">Your {{ pictures.name }} is added to the cart.</span>
@@ -10,11 +10,16 @@
     </div>
 </template>
 
-<script setup>
+<script setup>    
+const chlen = ref(props.chlen);
+
 const hidButton = () => { 
-    console.log('clicked')
-    
+    console.log('clicked');
+    chlen.value = false;    
 };  
+
+
+
 onMounted(() => {
     console.log('mounted')
 });
@@ -22,6 +27,10 @@ onMounted(() => {
 const props = defineProps({
     id: {
         type: Number,
+        required: true
+    },
+    chlen: {
+        type: Boolean,
         required: true
     }
 });

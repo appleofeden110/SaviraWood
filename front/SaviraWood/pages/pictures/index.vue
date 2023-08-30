@@ -2,7 +2,7 @@
     <div v-for="p in pictures">
         <CartAlert ref="Alert" class="al" :id="p.id"/>
         <div class="grid mx-5 my-5 md:grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-5 gap-y-10"> 
-            <div v-for="p in pictures" :key="p.id" class="overflow-hidden border rounded-md shadow-lg">
+            <div :key="p.id" class="overflow-hidden border rounded-md shadow-lg">
                 <div class="p-4" >
                     <NuxtImg src="/pics/Big_Ship/Big_Ship_View.jpg" class="rounded-md w-96" />
                     <a :href="`/pictures/${p.id}`" class="font-bold tex-lg pr-[4rem]">{{ p.name }}</a>

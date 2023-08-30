@@ -1,18 +1,12 @@
 <script setup>
-const products = ref('');
-getProd(2)
-.then((data) => {
-    products.value = data.value;
-    console.log(products.value);
-});
 
 </script>
 
 <template>
   <div>
-    <CartAlert id=2 />
+    <CartAlert chlen=true id=2 />
     <p>
-      {{ products.name }}
+      <button >Hid alert</button>
     </p>
   </div>
 </template>
