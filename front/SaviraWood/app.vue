@@ -1,19 +1,19 @@
 <template>
   <nuxt-layout>
-  
-  <header>
-  </header>
-  
-  <main>
-  </main>
-  
-  <footer>
-  </footer>
-
-  <aside>
-  </aside>
-  
-  <router-view></router-view>
+    
+    <header>
+    </header>
+    
+    <main>
+      <router-view></router-view>
+    </main>
+    
+    <footer>
+    </footer>
+    
+    <aside>
+    </aside>
+    
   </nuxt-layout>
 
 </template>

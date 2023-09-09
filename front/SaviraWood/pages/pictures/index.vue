@@ -1,6 +1,6 @@
 <template>
     <div v-for="p in pictures">
-        <CartAlert ref="Alert" class="al" :id="p.id"/>
+        <CartAlert ref="Alert" class="al" :show="show ? true : false" :id="p.id"/>
         <div class="grid mx-5 my-5 md:grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-5 gap-y-10"> 
             <div :key="p.id" class="overflow-hidden border rounded-md shadow-lg">
                 <div class="p-4" >
@@ -18,8 +18,7 @@
 
 <script setup>
 import { ShoppingCartIcon }  from '@heroicons/vue/24/outline'
-import { onMounted, onUpdated, ref } from 'vue';
-const { data: pictures } = await useFetch('http://127.0.0.1:5000/pictures');
+const { data: pictures } = await useFetch('http://127.0.0.1:5000/products');
 
 onMounted(() => {
     console.log('mounted')
@@ -29,14 +28,13 @@ onUpdated(() => {
     console.log('updated')
 })
 
+const cartButPress = () => {
+    console.log(cartId.value.id);
+    show.value = true;
+}
 const cartId = ref({
     id: pictures.id
 });
-const cartButPress = () => {
-    console.log('clicked');
-    document.querySelector('.al').style.display = 'block';     
-    console.log(cartId.value);
-}
 </script>
 
 <style scoped>

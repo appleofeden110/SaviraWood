@@ -1,0 +1,1 @@
+export const st = (hui) => useState('hello', `returning: ${hui}`)

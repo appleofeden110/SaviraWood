@@ -8,7 +8,7 @@
 
 <script setup>
     const { id } = useRoute().params
-    const { data: pictures } = await useFetch(`http://127.0.0.1:5000/pictures/${id}`)
+    const { data: pictures } = await useFetch(`http://127.0.0.1:5000/products/${id}`)
     const prodName = "Big_Ship_View"
 </script>
 
