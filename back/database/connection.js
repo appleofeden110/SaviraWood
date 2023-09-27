@@ -9,3 +9,5 @@ connection.connect((err) => {
     }
     console.log('Connection established');
 });
+
+connection.end()
