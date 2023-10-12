@@ -8,7 +8,6 @@ async function getAllUsers(req, res) {
         res
             .status(200)
             .json(users)
-            
         } 
     } catch (err) {
         console.log(err)
@@ -39,25 +38,24 @@ async function getOneUser(req, res, id) {
 
 async function createOneUser(req, res) {
     try {
-        const {name, surname, email, password, is_admin} = req.body
-        const passwordHash = await hash(password, 12)
+        const { name, surname, email, password, is_admin, session_id } = req.body;
+        const passwordHash = await hash(password, 12);
         const newUser = {
-            name, 
-            surname, 
+            name,
+            surname,
             email,
             passwordHash,
-            is_admin
-        }
-        res
-            .status(201)
-            .json(await createOneModel(Object.values(newUser)))
+            is_admin,
+            session_id
+        };
+        const createdUser = await createOneModel(Object.values(newUser));
+        res.status(201).json(createdUser);
     } catch (err) {
-        console.log(err) 
-        res
-            .status(500)
-            .json(err)
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-} 
+}
+
 
 async function updateOneUser(req, res, id) {
     try {

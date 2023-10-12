@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const app = express();
 const router = express.Router(['caseSensetive']);
-const port = 5000;
+const port = 5050;
 const { getAllUsers, getOneUser, createOneUser, updateOneUser, deleteOneUser } = require('./Controller/userController');
 const { getAllProducts, getOneProduct, createOneProduct, updateOneProduct, deleteOneProduct } = require('./Controller/productController')
 app.use(cors());
@@ -79,6 +79,8 @@ app.delete('/products/:id', (req, res, next) => {
         throw new Error(`Error: ${err}`)
     }
 })
+
+
 //Users
 app.get('/users', (req, res) => {
     try {
@@ -141,7 +143,12 @@ app.delete('/users/:id', (req, res, next) => {
             .json(err)
     }
 })
+
+//Login
+
+
 app.listen(port, () => {
     console.log(`Running on port ${port}`)
     console.log(`Access on http://127.0.0.1:${port}`)
 })
+

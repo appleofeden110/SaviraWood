@@ -1,5 +1,5 @@
-const { readProduct, createProduct, updateProduct, deleteProduct } = require('../database/Products/productQueries.js')
-const products = {};
+const { readProduct, createProduct, updateProduct, deleteProduct } = require('../database/productQueries.js')
+const products = [];
 function readProductModel() {
     try { 
         return new Promise(async (resolve, reject) => {
@@ -8,9 +8,7 @@ function readProductModel() {
         })
     } catch (err) {
         console.log(err)
-        res
-            .status(500)
-            .json(err)
+
     }
 }
 function readOneProductModel(id) {
@@ -18,7 +16,7 @@ function readOneProductModel(id) {
         return new Promise(async (resolve, reject) => {
             await readProduct(products);
             id--;
-            resolve(products[`${id}`])
+            resolve(products[id])
         })
     } catch (err) {
         console.log(err)

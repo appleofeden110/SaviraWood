@@ -1,17 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
-  purge: [
-    './components/*.{vue,js}',
-    './layouts/*.vue',
-    './pages/**/*.vue',
-    './plugins/**/*.{js,ts}',
-    './nuxt.config.{js,ts}',
-  ],
-  content: [],
+  content: ["./src/**/*.{html,svelte,ts,js}"],
   theme: {
     extend: {},
   },
   plugins: [],
 }
-

@@ -1,5 +1,5 @@
-const { readUser, createUser, updateUser, deleteUser } = require('../database/User/userQueries');
-const users = {};
+const { readUser, createUser, updateUser, deleteUser } = require('../database/userQueries');
+const users = [];
 function readModel() {
     try{ 
         return new Promise(async (resolve, reject) => {
@@ -15,14 +15,11 @@ function readOneModel(id) {
         return new Promise(async (resolve, reject) => {
             await readUser(users);
             id--;
-            resolve(users[`${id}`]);
+            resolve(users[id]);
         })
     } catch (err) {
         console.log(err)
         //server error
-        req
-            .status(500)
-            .json(err)
     }
 }
 function createOneModel(userData) {
@@ -34,10 +31,7 @@ function createOneModel(userData) {
         })
     } catch (err) {
         console.log(err)
-        //server error 
-        req
-            .status(500)
-            .json(err)
+        throw new Error(err)
     }
 }
 function updateOneModel(newData) {
@@ -49,9 +43,6 @@ function updateOneModel(newData) {
         })
     } catch (err) {
         console.log(err)
-        req
-            .status(500)
-            .josn(err)
     }
 }
 function deleteOneModel(id) {
