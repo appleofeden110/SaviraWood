@@ -1,15 +1,6 @@
-export function load({cookies}) {
-    const id = cookies.get('sessionId');
-
-    if(!id) {
-        cookies.set('sessionId', crypto.randomUUID(), {path: '/'});
-    }
-
-
-}
+import { redirect } from "@sveltejs/kit";
 export const actions = {
-    create: async ({ cookies, request }) => {
-        try {
+    create: async ({ request }) => {
             const data = await request.formData();
             const parsed = {
                 name: data.get('name'),
@@ -17,9 +8,9 @@ export const actions = {
                 email: data.get('email'),
                 password: data.get('password'),
                 is_admin: parseInt(data.get('admin')),
-                session_id: cookies.get('sessionId')
+                session_id: crypto.randomUUID()
             };
-            const response = await fetch('http://localhost:5050/users', {
+            const response = await fetch('http://127.0.0.1:5050/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -30,10 +21,6 @@ export const actions = {
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
             }
-
-            // Handle the response here if needed
-        } catch (error) {
-            console.error('Error:', error);
-        }
+            throw redirect(303, '/login')
     }
 };

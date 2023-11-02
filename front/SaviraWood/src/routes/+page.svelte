@@ -30,7 +30,7 @@
                    data-te-ripple-color="light"
                    href="/pictures">
                     Wooden Pictures
-                1</a>
+                </a>
                 <a type="button"
                    class="rounded border-2 border-neutral-50
                    px-7 pb-[8px] pt-[10px]

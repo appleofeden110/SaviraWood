@@ -33,13 +33,24 @@ function readUser(arr) {
 }
 function createUser(data) {
     const sql = 'INSERT INTO users(name, surname, email, password, is_admin, session_id)  VALUES ?  '
-        conn.query(sql, [data], (err, results, fields) => {
-            if(err){
-                console.log(err);
-            } else {
-                console.log(`Rows Affected: ${results.affectedRows}`);
-                
-            }
+    return new Promise((resolve, reject) => {
+        pool.getConnection((err, connection) => {
+                if(err) {
+                     console.log(`Error getting connection: ${err}`)
+                     reject(err);
+                     return;
+                }
+                connection.query(sql, [data], (err, results, fields) => {
+                    connection.release()
+                    if(err){
+                        console.log(err);
+                        reject(err);
+                    } else {
+                        console.log(`Rows Affected: ${results.affectedRows}`);
+                        resolve(data);
+                    }
+                })
+            })
         })
     }
 function updateUser(data) {

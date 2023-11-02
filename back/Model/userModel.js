@@ -24,8 +24,8 @@ function readOneModel(id) {
 }
 function createOneModel(userData) {
     try {
-        return new Promise((resolve, reject) => {
-            const user = createUser([userData])
+        return new Promise(async (resolve, reject) => {
+            const user = await createUser([userData])
             console.log(user)
             resolve(user) 
         })
@@ -54,9 +54,6 @@ function deleteOneModel(id) {
         })
     } catch (err) {
         console.log(err)
-        req
-            .status(500)
-            .json(err)
     }
 }
 module.exports = {

@@ -1,25 +1,16 @@
-const response = await fetch('http://localhost:5050/products')
-const data = await response.json()
-
-export function load() {
+export async function load({cookies}) {
+    const response = await fetch('http://127.0.0.1:5050/products')
+    const prods = await response.json();
+    console.log(cookies.get('sessionId'))
     return {
-        summaries: data.map((prod) => ({
+        summaries: prods.map((prod) => ({
             id: prod.id,
             name: prod.name,
             width: prod.width,
             height: prod.height,
             weight: prod.weight,
             price: prod.price
-        }))
-    };
-}
-
-export const actions = {
-    default: async ({ cookies , request }) => {
-        const data = await request.formData();
-        
+        })),
+        cookie: cookies.get('sessionId')
     }
 }
-
-
-

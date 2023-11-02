@@ -1,21 +1,28 @@
+//express init
 const express = require('express');
-const cors = require('cors')
 const app = express();
-const router = express.Router(['caseSensetive']);
-const port = 5050;
-const { getAllUsers, getOneUser, createOneUser, updateOneUser, deleteOneUser } = require('./Controller/userController');
-const { getAllProducts, getOneProduct, createOneProduct, updateOneProduct, deleteOneProduct } = require('./Controller/productController')
-app.use(cors());
 app.use(express.json())
+//cors
+const cors = require('cors')
+app.use(cors());
+//router config
+const router = express.Router(['caseSensetive']);
+//port init
+const port = 5050;
+//controllers import
+const { getAllUsers, getOneUser, createOneUser, updateOneUser, deleteOneUser, loginUser } = require('./Controller/userController');
+const { getAllProducts, getOneProduct, createOneProduct, updateOneProduct, deleteOneProduct } = require('./Controller/productController')
+const { readCart, writeCart, deleteOneCart } = require('./Controller/cartController');
 //Default
 app.get('/', (req, res) => {
     res
         .status(200)
-        .json({messgae: 'WELCOME to SaviraWood!!! The best wooden pictures and furniture you can find for a price'})
-// Products
+        .json({message: 'WELCOME to SaviraWood!!! The best wooden pictures and furniture you can find for a price'})
 })
 
-    app.get('/products', (req, res, next) => {
+// Products
+
+app.get('/products', (req, res, next) => {
     try {
         getAllProducts(req, res)
         console.log('request received')
@@ -121,7 +128,7 @@ app.post('/users', (req, res, next) => {
 })
 app.put('/users/:id', (req, res, next) => {
     try {
-        console.log(req.body)
+
         updateOneUser(req, res, req.params.id)
         res.send(req.body)
     } catch (err) {
@@ -145,7 +152,47 @@ app.delete('/users/:id', (req, res, next) => {
 })
 
 //Login
+app.post('/login', (req, res, next) => {
+    try {
+        loginUser(req, res);
+        console.log(`Login successful! Welcome!`);
+    } catch(err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 
+})
+
+//Cart
+app.get('/cart/:session', (req, res) => {
+    try {
+        readCart(req, res, req.params.session);
+        console.log('Cart has been fetched');
+    } catch (e) {
+        console.log(e);
+        res.status(500).json(e)
+    }
+})
+app.post('/cart/:session', (req, res) => {
+    try {
+        writeCart(req, res, req.params.session)
+        console.log(req.body)
+        console.log('cart has been written into')
+    } catch (e) {
+        console.log(e);
+        res.status(500).json(e);
+    }
+})
+
+app.delete('/cart/:session', (req, res)=> {
+    try {
+        deleteOneCart(req, res, req.params.session);
+        console.log(req.body)
+        console.log('Record has been deleted')
+    } catch(e) {
+        console.log(e);
+    }
+})
 
 app.listen(port, () => {
     console.log(`Running on port ${port}`)
