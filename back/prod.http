@@ -1,0 +1,10 @@
+POST http://localhost:5050/cart/2ba8200b-2183-450d-8e91-0d92c8b17739
+Content-Type: application/json
+
+{
+  "name": "hui2",
+  "width":  69,
+  "height": 96,
+  "weight": 123,
+  "price": 56
+}
