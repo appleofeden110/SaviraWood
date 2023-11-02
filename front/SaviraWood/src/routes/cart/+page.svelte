@@ -1,6 +1,5 @@
 <script>
     export let data;
-    console.log(data.cartProds)
     let totalPrice = 0;
     const products = data.cartProds;
     products.forEach((prod) => {
