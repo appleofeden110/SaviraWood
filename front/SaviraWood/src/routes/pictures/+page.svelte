@@ -3,7 +3,7 @@
     import {displayAlert, Alert_Type} from "$lib/stores";
 
     export let data;
-    async function openAlert(n, wd, hg, wg, p, e) {
+    async function openAlert(n, wd, hg, wg, p) {
         if (data.cookie !== undefined){
             const prod = {
                 name: n,
@@ -13,16 +13,21 @@
                 price: p
             }
             const parsed = JSON.stringify(prod)
-            const response = await fetch('/cartRq', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: parsed
-            })
-            const cartMsg = await response.json();
-            console.log(cartMsg.message)
-            displayAlert(`<p>${cartMsg.message}</p>`, Alert_Type.SUCCESS);
+            const {prod_id, name, width, height, weight, price, session_id} = data.carts
+            if (name !== n){
+                const response = await fetch('/cartRq', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: parsed
+                })
+                const cartMsg = await response.json();
+                console.log(cartMsg.message)
+                displayAlert(`<p>${cartMsg.message}</p>`, Alert_Type.SUCCESS);
+            } else {
+                displayAlert(`<p>${n} is already in the Cart!</p>`, Alert_Type.INFO)
+            }
         } else{
             displayAlert(`<a href="/signin">You are not registered, be sure to <strong>Sign in</strong> to add products to cart</a>`, Alert_Type.DANGER)
         }

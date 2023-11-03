@@ -30,7 +30,7 @@ export const actions = {
                 cookies.set('sessionId', user.session_id)
             }
             console.log(cookies.get('sessionId'))
-            throw redirect(303, `/login/${user.id}`)
+            throw redirect(303, `/user/${user.id}`)
 
     }
 }

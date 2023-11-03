@@ -1,3 +1,5 @@
+import {redirect} from "@sveltejs/kit";
+
 export async function load({cookies, params}) {
     const cookie = cookies.get('sessionId');
     if (!cookie) {
@@ -18,4 +20,15 @@ export async function load({cookies, params}) {
     return{
         user
     };
+}
+
+export const actions = {
+    signOut: async ({request, cookies}) => {
+        if (cookies.get("sessionId")) {
+            const cookieDelete = cookies.set('sessionId', '', {
+                expires: new Date(5.34e10)
+            });
+            throw redirect(303, '/user/login')
+        }
+    }
 }

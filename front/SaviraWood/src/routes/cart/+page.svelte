@@ -5,7 +5,15 @@
     products.forEach((prod) => {
         totalPrice += prod.price
     })
-    let hui = null
+    async function deleteProd(name) {
+       const response = await fetch('/cartRq', {
+           method: 'DELETE',
+           headers: {
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({name})
+       })
+    }
 </script>
 
 <div class="flex ">
@@ -29,7 +37,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col items-center">
-                        <button class="px-4 py-2 mr-5 font-semibold text-green-700 bg-transparent border border-green-500 rounded hover:bg-green-500 hover:text-white hover:border-transparent ">
+                        <button on:click={deleteProd(name)} class="px-4 py-2 mr-5 font-semibold text-green-700 bg-transparent border border-green-500 rounded hover:bg-green-500 hover:text-white hover:border-transparent ">
                             Remove
                         </button>
                     </div>
