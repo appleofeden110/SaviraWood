@@ -1,6 +1,6 @@
 import { redirect } from "@sveltejs/kit";
 export const actions = {
-    create: async ({ request }) => {
+    create: async ({ cookies, request }) => {
             const data = await request.formData();
             const parsed = {
                 name: data.get('name'),
@@ -21,6 +21,15 @@ export const actions = {
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
             }
-            throw redirect(303, '/login')
+            if (!cookies.get('tempSesh')) {
+                cookies.set('tempSesh', crypto.randomUUID(), {
+                    maxAge: 86400,
+                    path: '/'
+                })
+                const response = await fetch(`http://127.0.0.1:5050/mail/${parsed.email}`)
+                const msg = await response.json
+                console.log(msg.message)
+            }
+            throw redirect(303, '/user/login')
     }
 };

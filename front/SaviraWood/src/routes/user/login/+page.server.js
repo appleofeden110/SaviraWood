@@ -2,7 +2,8 @@ import { redirect } from '@sveltejs/kit';
 
 
 export const actions = {
-    login: async ({ cookies, request}) => {
+    login:
+        async ({ cookies, request}) => {
             const data = await request.formData();
             const parsed = {
                 email: data.get('email'),
@@ -21,16 +22,21 @@ export const actions = {
                 },
                 body: JSON.stringify(parsed)
             });
-
             if(!responsePOST.ok) {
                 console.log('login failed');
                 console.log(`HTTP Error: ${responsePOST.status}`)
             }
             if(!cookies.get('sessionId')) {
-                cookies.set('sessionId', user.session_id)
+                cookies.set('sessionId', user.session_id, {
+                    path: '/'
+                })
             }
             console.log(cookies.get('sessionId'))
-            throw redirect(303, `/user/${user.id}`)
-
+            console.log(user.is_admin)
+            if (user.is_admin === 1){
+                throw redirect(303, `/admin`)
+            } else {
+                throw redirect(303, `/user/dashboard`)
+            }
     }
 }
