@@ -2,7 +2,13 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="Go" enabled="true" />
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/httpRequests" />
+      <excludeFolder url="file://$MODULE_DIR$/front/SaviraWood/.svelte-kit" />
+      <excludeFolder url="file://$MODULE_DIR$/front/SaviraWood/build" />
+      <excludeFolder url="file://$MODULE_DIR$/front/SaviraWood/src/lib" />
+    </content>
     <orderEntry type="jdk" jdkName="Python 3.11 (rest-YN6UiVm1)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

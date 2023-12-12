@@ -1,0 +1,7 @@
+DELETE http://localhost:3333/carts/delete
+Content-Type: application/json
+
+{
+  "name": "Clocks Time To Live",
+  "session_id":"18966f0e-b5f9-4554-9f0d-fb5a09c5b80a"
+}
