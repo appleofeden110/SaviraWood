@@ -7,7 +7,7 @@ export async function load({cookies}) {
             message: 'nope'
         }
     }
-    const response = await fetch('http://127.0.0.1:5050/users');
+    const response = await fetch('http://127.0.0.1:3333/users/read');
     const users = await response.json();
     const user = users.find((u) => u.session_id === cookie);
     return{

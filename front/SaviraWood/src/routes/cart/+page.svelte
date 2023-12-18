@@ -6,13 +6,14 @@
         totalPrice += prod.price
     })
     async function deleteProd(name) {
-       const response = await fetch('/cartRq', {
+        await fetch('/cartRq', {
            method: 'DELETE',
            headers: {
                'Content-Type': 'application/json'
            },
            body: JSON.stringify({name})
-       })
+       });
+       location.reload()
     }
 </script>
 

@@ -54,7 +54,7 @@ func main() {
 	//get all cart products determined by the session_id of the user, method: GET
 	http.HandleFunc("/carts/read/", cart.GetCartProds)
 	//create a product in the cart for single user, method: POST
-	http.HandleFunc("/carts/create", cart.CreateCartProduct)
+	http.HandleFunc("/carts/create/", cart.CreateCartProduct)
 	//delete one product from the cart for single user, method: DELETE
 	http.HandleFunc("/carts/delete", cart.DeleteCartProd)
 	//port init

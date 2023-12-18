@@ -1,7 +1,7 @@
 export async function load({cookies}) {
-    const response_p = await fetch('http://127.0.0.1:5050/products')
+    const response_p = await fetch('http://127.0.0.1:3333/products/read')
     const prods = await response_p.json();
-    const response_c = await fetch(`http://127.0.0.1:5050/cart/${cookies.get('sessionId')}`)
+    const response_c = await fetch(`http://127.0.0.1:3333/carts/read/${cookies.get('sessionId')}`)
     const cart = await response_c.json();
     return {
         summaries: prods.map((prod) => ({

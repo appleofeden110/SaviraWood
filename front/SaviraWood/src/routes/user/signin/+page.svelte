@@ -10,7 +10,7 @@
             <input type="text" name="email" id="emailInput" class="border border-black" required>
             <label for="passInput">Password</label>
             <input type="password" id="passInput" name="password" class="border border-black" required>
-            <input type="number" name="admin" value=0 hidden>
+            <input type="checkbox" name="admin" value=false hidden>
             <button type="submit" class="w-16 py-1 my-2 text-green-500 border border-green-500">Submit</button>
         </form>
     </div>

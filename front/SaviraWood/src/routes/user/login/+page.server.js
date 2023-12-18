@@ -9,13 +9,13 @@ export const actions = {
                 email: data.get('email'),
                 password: data.get('password')
             };
-            const responseGET = await fetch('http://127.0.0.1:5050/users');
+            const responseGET = await fetch('http://127.0.0.1:3333/users/read');
             const users = await responseGET.json();
             const user = users.find((u)=> u.email === parsed.email);
             if (!user) {
                 console.log('No user has been found by your email');
             }
-            const responsePOST = await fetch('http://127.0.0.1:5050/login', {
+            const responsePOST = await fetch('http://127.0.0.1:3333/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
